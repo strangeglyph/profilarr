@@ -24,3 +24,7 @@ config-test/
 radarr-config/
 sonarr-config/
 test-data/
+
+# Nix
+result
+.nixos-test-history

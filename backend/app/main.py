@@ -25,7 +25,8 @@ def create_app():
     logger = setup_logging()
 
     logger.info("Creating Flask application")
-    app = Flask(__name__, static_folder='static')
+    static_dir = os.getenv('STATIC_DIR', 'static')
+    app = Flask(__name__, static_folder=static_dir)
     CORS(app, resources={r"/*": {"origins": "*"}})
 
     # Serve static files
