@@ -58,12 +58,12 @@ in
         default = "/var/lib/profilarr";
       };
 
-      environmentFile = mkOption {
+      environmentFiles = mkOption {
         description = ''
           Path to file storing environment variables to be passed to the service.
         '';
-        type = types.nullOr types.path;
-        default = null;
+        type = types.listOf types.path;
+        default = [];
         example = "/run/secrets/media-manager.env";
       };
     };
@@ -113,7 +113,7 @@ in
       serviceConfig = {
         LogsDirectory = "profilarr";
         StateDirectory = "profilarr";
-        EnvironmentFile = lib.optional (cfg.environmentFile != null) cfg.environmentFile;
+        EnvironmentFile = cfg.environmentFiles;
         BindPaths = [
           "${cfg.stateDir}:/config"
         ];
